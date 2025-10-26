@@ -1,0 +1,1 @@
+Alle Links sind relativ. Öffne index.html lokal per Doppelklick.

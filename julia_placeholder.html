@@ -1,0 +1,112 @@
+<!doctype html>
+<html lang="de" data-theme="light">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Julia Placeholder</title>
+  <meta name="description" content="Platzhalterseite im Navigationssystem"/>
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;700;800&family=Fredoka:wght@400;600;700&display=swap" rel="stylesheet">
+  <style>
+:root { --bg:#fff7fb; --bg1:rgba(255,126,184,.12); --bg2:rgba(154,230,255,.12); --bg3:rgba(216,199,255,.12);
+  --card:#ffffff; --ink:#4a3b52; --muted:#8a7a94; --brand:#ff7eb8; --accent:#8ad8ff; --line:#f3d7e9;
+  --b1:#ffeea9; --b1b:#ffd74f; --b1c:#7b5d00; --b2:#b8f2e1; --b2b:#7fdcc4; --b2c:#0e6046; --b3:#d8c7ff; --b3b:#bda3ff; --b3c:#403264;
+  --ok:#63caa4; --warn:#ffbf69; --err:#ff7a9f; --shadow:0 8px 24px rgba(255,126,184,.18);
+}
+[data-theme="dark"] {
+  --bg:#0a0b1a; --card:#12132b; --ink:#e8e6ff; --muted:#b3aed1; --brand:#ff99cc; --accent:#66e0ff; --line:#24264b;
+  --b1:#2a213f; --b1b:#5f43a8; --b1c:#e9dcff; --b2:#1b3541; --b2b:#2c7c8b; --b2c:#c5f6ff; --b3:#3a2540; --b3b:#7f4f98; --b3c:#ffe9ff;
+  --ok:#7be0b0; --warn:#ffd166; --err:#ff88aa; --shadow:0 12px 28px rgba(0,0,0,.45);
+}
+html,body{margin:0;padding:0;background:var(--bg);color:var(--ink);font:16px/1.7 Nunito, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial}
+body{background-image: radial-gradient(circle at 10% 10%, var(--bg1) 0 12px, transparent 13px),
+                         radial-gradient(circle at 90% 20%, var(--bg2) 0 10px, transparent 11px),
+                         radial-gradient(circle at 20% 85%, var(--bg3) 0 10px, transparent 11px);
+     background-size:240px 240px, 220px 220px, 260px 260px;}
+a{color:var(--brand)} a:hover{text-decoration:underline}
+pre{background:#fff4fb;border:1px solid var(--line);padding:12px;border-radius:16px;box-shadow:var(--shadow);overflow:auto}
+[data-theme="dark"] pre{background:#181a38;border-color:#2b2e5f}
+.wrap{display:grid;grid-template-columns:280px 1fr;gap:24px;max-width:1100px;margin:0 auto;padding:24px}
+nav{position:sticky;top:16px;align-self:start;background:var(--card);border:2px dashed var(--line);border-radius:20px;padding:16px;box-shadow:var(--shadow)}
+nav h2{font-size:16px;margin:0 0 8px 0;color:var(--muted);font-weight:800;letter-spacing:.3px}
+nav ol{margin:0;padding-left:20px} nav li{margin:8px 0}
+header{padding:34px 24px 16px 24px;border-bottom:2px dashed var(--line);background:linear-gradient(180deg,rgba(255,126,184,.12),transparent)}
+[data-theme="dark"] header{background:linear-gradient(180deg, rgba(255,153,204,.10), transparent)}
+header .container{max-width:1100px;margin:0 auto}
+h1{font-family: Fredoka, Nunito, system-ui; font-weight:800; font-size:36px; margin:0 0 8px 0}
+.badge{display:inline-block;background:var(--b1);color:var(--b1c);padding:6px 12px;border-radius:999px;font-weight:800;font-size:12px;margin:0 6px 6px 0;border:1px solid var(--b1b);box-shadow:0 2px 0 var(--b1b)}
+.badge.alt{background:var(--b2);color:var(--b2c);border-color:var(--b2b);box-shadow:0 2px 0 var(--b2b)}
+.badge.alt2{background:var(--b3);color:var(--b3c);border-color:var(--b3b);box-shadow:0 2px 0 var(--b3b)}
+section{background:var(--card);border:2px solid var(--line);border-radius:24px;padding:22px;margin-bottom:20px;box-shadow:var(--shadow)}
+h2{margin-top:0;font-family: Fredoka, Nunito; font-weight:800; letter-spacing:.2px}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:16px}
+.callout{border-left:6px solid var(--brand);background:rgba(255,126,184,.12);padding:12px 14px;border-radius:14px}
+.ok{border-left-color:var(--ok);background:rgba(99,202,164,.12)}
+.warn{border-left-color:var(--warn);background:rgba(255,191,105,.12)}
+.err{border-left-color:var(--err);background:rgba(255,122,159,.12)}
+.meta{color:var(--muted);font-size:14px}
+.stickers{display:flex;gap:8px;margin-top:8px}
+.sticker{display:inline-flex;align-items:center;justify-content:center;width:34px;height:34px;border-radius:50%;background:var(--card);border:2px solid var(--line);box-shadow:var(--shadow);font-size:18px}
+.topbar{position:sticky;top:0;background:var(--card);border-bottom:2px dashed var(--line);padding:8px 16px;display:flex;gap:12px;align-items:center;z-index:10}
+.toggler{margin-left:auto;background:var(--brand);color:#401a2a;border:none;border-radius:999px;padding:8px 14px;font-weight:800;cursor:pointer;box-shadow:var(--shadow)}
+</style>
+  <script>
+    (function () {
+      const saved = localStorage.getItem('theme');
+      if (saved) document.documentElement.setAttribute('data-theme', saved);
+      window.toggleTheme = function() {
+        const el = document.documentElement;
+        const next = el.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+        el.setAttribute('data-theme', next);
+        localStorage.setItem('theme', next);
+      };
+    })();
+  </script>
+</head>
+<body>
+  <div class="topbar">
+    <strong>🌸 Cute Docs</strong>
+    <a href="index.html" style="margin-left:8px">Start</a>
+    <a href="fiona_network_client_management.html">Fiona</a>
+    <a href="julia_placeholder.html">Julia</a>
+    <a href="jule_placeholder.html">Jule</a>
+    <a href="natasa_placeholder.html">Natasa</a>
+    <a href="words/gpos.html">Wörterbuch</a>
+    <button class="toggler" onclick="toggleTheme()">Dark / Light</button>
+  </div>
+  <header>
+    <div class="container">
+      <div class="meta">Dokumentation · GitHub Pages</div>
+      <h1>Julia Placeholder</h1>
+      <p class="meta">Platzhalterseite im Navigationssystem</p>
+      <p><span class="badge">🌟 GitHub Pages</span><span class="badge alt">🍓 Windows‑Domain</span><span class="badge alt2">🎀 How‑To</span></p>
+      <div class="stickers" aria-hidden="true"><span class="sticker">🌈</span><span class="sticker">💖</span><span class="sticker">🍬</span><span class="sticker">🧁</span><span class="sticker">⭐</span></div>
+    </div>
+  </header>
+  <div class="wrap">
+    <nav>
+      
+<h2>Navi</h2>
+<ol>
+  <li><a href="index.html">Start</a></li>
+  <li><a href="fiona_network_client_management.html">Fiona</a></li>
+  <li><a href="julia_placeholder.html">Julia</a></li>
+  <li><a href="jule_placeholder.html">Jule</a></li>
+  <li><a href="natasa_placeholder.html">Natasa</a></li>
+  <li><a href="words/gpos.html">Wörterbuch</a></li>
+</ol>
+
+    </nav>
+    <main>
+      
+<section>
+  <h2>Julia Placeholder – Placeholder</h2>
+  <p class="meta">Diese Seite ist ein Platzhalter. Inhalt folgt.</p>
+</section>
+
+    </main>
+  </div>
+  <footer style="max-width:1100px;margin:0 auto 48px auto;color:var(--muted);padding:0 24px">
+    <p>© 2025 Teamprojekt. Funktioniert lokal via <code>file://</code> und auf GitHub Pages dank relativer Links.</p>
+  </footer>
+</body>
+</html>
