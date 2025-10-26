@@ -1,121 +1,295 @@
-<!doctype html>
-<html lang="de" data-theme="light">
+<!DOCTYPE html>
+<html lang="de">
 <head>
-  <meta charset="utf-8" />
+  <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Start – Teamprojekt</title>
-  <meta name="description" content="Startseite mit Links zu allen Bereichen"/>
-  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;700;800&family=Fredoka:wght@400;600;700&display=swap" rel="stylesheet">
+  <title>Serverprojekt – Schritt-für-Schritt Dokumentation</title>
+  <meta name="color-scheme" content="dark light">
   <style>
-:root { --bg:#fff7fb; --bg1:rgba(255,126,184,.12); --bg2:rgba(154,230,255,.12); --bg3:rgba(216,199,255,.12);
-  --card:#ffffff; --ink:#4a3b52; --muted:#8a7a94; --brand:#ff7eb8; --accent:#8ad8ff; --line:#f3d7e9;
-  --b1:#ffeea9; --b1b:#ffd74f; --b1c:#7b5d00; --b2:#b8f2e1; --b2b:#7fdcc4; --b2c:#0e6046; --b3:#d8c7ff; --b3b:#bda3ff; --b3c:#403264;
-  --ok:#63caa4; --warn:#ffbf69; --err:#ff7a9f; --shadow:0 8px 24px rgba(255,126,184,.18);
-}
-[data-theme="dark"] {
-  --bg:#0a0b1a; --card:#12132b; --ink:#e8e6ff; --muted:#b3aed1; --brand:#ff99cc; --accent:#66e0ff; --line:#24264b;
-  --b1:#2a213f; --b1b:#5f43a8; --b1c:#e9dcff; --b2:#1b3541; --b2b:#2c7c8b; --b2c:#c5f6ff; --b3:#3a2540; --b3b:#7f4f98; --b3c:#ffe9ff;
-  --ok:#7be0b0; --warn:#ffd166; --err:#ff88aa; --shadow:0 12px 28px rgba(0,0,0,.45);
-}
-html,body{margin:0;padding:0;background:var(--bg);color:var(--ink);font:16px/1.7 Nunito, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial}
-body{background-image: radial-gradient(circle at 10% 10%, var(--bg1) 0 12px, transparent 13px),
-                         radial-gradient(circle at 90% 20%, var(--bg2) 0 10px, transparent 11px),
-                         radial-gradient(circle at 20% 85%, var(--bg3) 0 10px, transparent 11px);
-     background-size:240px 240px, 220px 220px, 260px 260px;}
-a{color:var(--brand)} a:hover{text-decoration:underline}
-pre{background:#fff4fb;border:1px solid var(--line);padding:12px;border-radius:16px;box-shadow:var(--shadow);overflow:auto}
-[data-theme="dark"] pre{background:#181a38;border-color:#2b2e5f}
-.wrap{display:grid;grid-template-columns:280px 1fr;gap:24px;max-width:1100px;margin:0 auto;padding:24px}
-nav{position:sticky;top:16px;align-self:start;background:var(--card);border:2px dashed var(--line);border-radius:20px;padding:16px;box-shadow:var(--shadow)}
-nav h2{font-size:16px;margin:0 0 8px 0;color:var(--muted);font-weight:800;letter-spacing:.3px}
-nav ol{margin:0;padding-left:20px} nav li{margin:8px 0}
-header{padding:34px 24px 16px 24px;border-bottom:2px dashed var(--line);background:linear-gradient(180deg,rgba(255,126,184,.12),transparent)}
-[data-theme="dark"] header{background:linear-gradient(180deg, rgba(255,153,204,.10), transparent)}
-header .container{max-width:1100px;margin:0 auto}
-h1{font-family: Fredoka, Nunito, system-ui; font-weight:800; font-size:36px; margin:0 0 8px 0}
-.badge{display:inline-block;background:var(--b1);color:var(--b1c);padding:6px 12px;border-radius:999px;font-weight:800;font-size:12px;margin:0 6px 6px 0;border:1px solid var(--b1b);box-shadow:0 2px 0 var(--b1b)}
-.badge.alt{background:var(--b2);color:var(--b2c);border-color:var(--b2b);box-shadow:0 2px 0 var(--b2b)}
-.badge.alt2{background:var(--b3);color:var(--b3c);border-color:var(--b3b);box-shadow:0 2px 0 var(--b3b)}
-section{background:var(--card);border:2px solid var(--line);border-radius:24px;padding:22px;margin-bottom:20px;box-shadow:var(--shadow)}
-h2{margin-top:0;font-family: Fredoka, Nunito; font-weight:800; letter-spacing:.2px}
-.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:16px}
-.callout{border-left:6px solid var(--brand);background:rgba(255,126,184,.12);padding:12px 14px;border-radius:14px}
-.ok{border-left-color:var(--ok);background:rgba(99,202,164,.12)}
-.warn{border-left-color:var(--warn);background:rgba(255,191,105,.12)}
-.err{border-left-color:var(--err);background:rgba(255,122,159,.12)}
-.meta{color:var(--muted);font-size:14px}
-.stickers{display:flex;gap:8px;margin-top:8px}
-.sticker{display:inline-flex;align-items:center;justify-content:center;width:34px;height:34px;border-radius:50%;background:var(--card);border:2px solid var(--line);box-shadow:var(--shadow);font-size:18px}
-.topbar{position:sticky;top:0;background:var(--card);border-bottom:2px dashed var(--line);padding:8px 16px;display:flex;gap:12px;align-items:center;z-index:10}
-.toggler{margin-left:auto;background:var(--brand);color:#401a2a;border:none;border-radius:999px;padding:8px 14px;font-weight:800;cursor:pointer;box-shadow:var(--shadow)}
-</style>
-  <script>
-    (function () {
-      const saved = localStorage.getItem('theme');
-      if (saved) document.documentElement.setAttribute('data-theme', saved);
-      window.toggleTheme = function() {
-        const el = document.documentElement;
-        const next = el.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
-        el.setAttribute('data-theme', next);
-        localStorage.setItem('theme', next);
-      };
-    })();
-  </script>
+    :root{
+      --bg:#0f1117; --surface:#151927; --card:#1a1f31; --card-2:#1e2438;
+      --text:#e7eaf2; --muted:#9aa3b2; --line:#2a3147;
+      --accent:#7aa2ff; --accent-2:#a78bfa; --radius:16px; --shadow:0 10px 30px rgba(0,0,0,.35);
+    }
+    @media (prefers-color-scheme: light){
+      :root{ --bg:#f6f7fb; --surface:#ffffff; --card:#ffffff; --card-2:#f7f8ff;
+      --text:#121422; --muted:#495165; --line:#e6e8f2; --shadow:0 10px 30px rgba(0,0,0,.08); }
+    }
+
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{
+      margin:0;
+      font:16px/1.6 system-ui,-apple-system,"Segoe UI",Roboto,Arial;
+      background:
+        radial-gradient(900px 600px at 15% -10%, rgba(122,162,255,.12), transparent 45%),
+        radial-gradient(800px 600px at 110% 10%, rgba(167,139,250,.12), transparent 40%),
+        var(--bg);
+      color:var(--text);
+    }
+
+    /* ========== Header ========== */
+    header{
+      padding:2rem 1rem 1rem;
+      text-align:left;
+      border-bottom:1px solid var(--line);
+      background:var(--surface);
+      box-shadow:0 5px 20px rgba(0,0,0,0.2);
+    }
+    .wrap{
+      max-width:960px;
+      margin:0 auto;
+    }
+    .brand{
+      display:flex;
+      align-items:center;
+      gap:.6rem;
+      font-weight:700;
+    }
+    .dot{
+      width:10px; height:10px;
+      border-radius:50%;
+      background:radial-gradient(circle at 30% 30%, var(--accent), var(--accent-2));
+    }
+    h1{margin:.4rem 0; font-size:clamp(1.6rem,4vw,2.2rem);}
+    .intro{color:var(--muted); max-width:750px;}
+
+    /* ========== Karten & Layout ========== */
+    .card{
+      background:linear-gradient(180deg, var(--card), var(--card-2));
+      border:1px solid var(--line);
+      border-radius:var(--radius);
+      box-shadow:var(--shadow);
+      padding:1.2rem;
+      margin:1.2rem 0;
+    }
+    .card h2{margin:.2rem 0 1rem; font-size:1.35rem; color:var(--accent-2);}
+    .card h3{margin:1rem 0 .5rem; font-size:1.05rem; color:var(--accent);}
+    .list{padding-left:1.1rem;}
+    .steps{counter-reset:step;}
+    .steps li{margin:.65rem 0;}
+    .steps li::marker{color:var(--accent);}
+    code{background:#0d1222; border:1px solid var(--line); padding:.1rem .35rem; border-radius:8px;}
+    .def{
+      border-left:4px solid var(--accent);
+      padding:.7rem 1rem;
+      background:color-mix(in oklab, var(--card) 92%, transparent);
+      border-radius:12px;
+      margin:.7rem 0;
+    }
+    .footer{
+      margin-top:1rem;
+      padding:.6rem .8rem;
+      border-top:1px dashed var(--line);
+      color:var(--muted);
+      font-size:.95rem;
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+    }
+    .tag{
+      font-size:.8rem;
+      padding:.15rem .55rem;
+      border:1px solid var(--line);
+      border-radius:999px;
+    }
+    .who{
+      padding:.15rem .55rem;
+      border:1px solid var(--line);
+      border-radius:999px;
+    }
+    .placeholder{
+      opacity:.95;
+      background:color-mix(in oklab, var(--card-2) 72%, transparent);
+      border:1px dashed var(--line);
+    }
+    .callout{
+      background:linear-gradient(180deg, color-mix(in oklab, var(--card) 90%, transparent), var(--card));
+      border:1px solid var(--line);
+      border-radius:12px;
+      padding:.9rem 1rem;
+      margin:1rem 0;
+    }
+    hr{border:none; height:1px; background:linear-gradient(90deg,transparent,var(--line),transparent); margin:1.5rem 0;}
+  </style>
 </head>
 <body>
-  <div class="topbar">
-    <strong>🌸 Cute Docs</strong>
-    <a href="index.html" style="margin-left:8px">Start</a>
-    <a href="fiona_network_client_management.html">Fiona</a>
-    <a href="julia_placeholder.html">Julia</a>
-    <a href="jule_placeholder.html">Jule</a>
-    <a href="natasa_placeholder.html">Natasa</a>
-    <a href="words/gpos.html">Wörterbuch</a>
-    <button class="toggler" onclick="toggleTheme()">Dark / Light</button>
-  </div>
+
+  <!-- ========== HEADER (nicht sticky!) ========== -->
   <header>
-    <div class="container">
-      <div class="meta">Dokumentation · GitHub Pages</div>
-      <h1>Start – Teamprojekt</h1>
-      <p class="meta">Startseite mit Links zu allen Bereichen</p>
-      <p><span class="badge">🌟 GitHub Pages</span><span class="badge alt">🍓 Windows‑Domain</span><span class="badge alt2">🎀 How‑To</span></p>
-      <div class="stickers" aria-hidden="true"><span class="sticker">🌈</span><span class="sticker">💖</span><span class="sticker">🍬</span><span class="sticker">🧁</span><span class="sticker">⭐</span></div>
+    <div class="wrap">
+      <div class="brand"><span class="dot"></span> Serverprojekt – Teamdokumentation</div>
+      <h1>Schritt-für-Schritt (von oben nach unten)</h1>
+      <p class="intro">
+        Diese Seite ist für GitHub Pages gedacht. Arbeite die Karten nacheinander ab.
+        Jede Karte endet mit <b>„Verantwortlich: …“</b>. Platzhalter sind klar markiert
+        und leicht zu ersetzen.
+      </p>
     </div>
   </header>
-  <div class="wrap">
-    <nav>
-      
-<h2>Inhalt</h2>
-<ol>
-  <li><a href="fiona_network_client_management.html">Fiona – Netzwerk & Client‑Management</a></li>
-  <li><a href="julia_placeholder.html">Julia – Placeholder</a></li>
-  <li><a href="jule_placeholder.html">Jule – Placeholder</a></li>
-  <li><a href="natasa_placeholder.html">Natasa – Placeholder</a></li>
-  <li><a href="words/gpos.html">Wörterbuch (GPOs & mehr)</a></li>
-</ol>
 
-    </nav>
-    <main>
-      
-<section>
-  <h2>Willkommen ✨</h2>
-  <p>Start in die Doku. Von hier gelangst du zu allen Bereichen & zum Wörterbuch.</p>
-  <div class="grid">
-    <div class="callout ok">
-      <h3><a href="fiona_network_client_management.html">Fiona – Netzwerk & Client‑Management</a></h3>
-      <p>Netzwerk‑IPs, Domänenbeitritt, Laufwerkszuordnung, GPOs, Drucker.</p>
-    </div>
-    <div class="callout">
-      <h3><a href="words/gpos.html">Wörterbuch</a></h3>
-      <p>GPOs, Domänencontroller, AD DS, DNS, DHCP, OUs, u.v.m.</p>
-    </div>
-  </div>
-</section>
+  <main class="wrap">
 
-    </main>
-  </div>
-  <footer style="max-width:1100px;margin:0 auto 48px auto;color:var(--muted);padding:0 24px">
-    <p>© 2025 Teamprojekt. Funktioniert lokal via <code>file://</code> und auf GitHub Pages dank relativer Links.</p>
+    <!-- 0) Anleitung -->
+    <section class="card" id="anleitung">
+      <h2>0) So benutzt du diese Dokumentation</h2>
+      <div class="callout">
+        <p>Starte bei Karte <b>1</b> und arbeite dich nach unten. Erledige pro Karte alle Schritte. Prüfe die „Checkliste“ am Ende jeder Karte.</p>
+      </div>
+      <ol class="steps list">
+        <li>Lesen, durchführen, abhaken.</li>
+        <li>Wenn „[Placeholder]“ steht: später ersetzen (siehe Kommentar im Code).</li>
+        <li>Notizen direkt unter der Karte ergänzen.</li>
+      </ol>
+      <div class="footer">
+        <span class="tag">Start</span>
+        <span class="who">Verantwortlich: Team</span>
+      </div>
+    </section>
+
+    <!-- 1) Netzwerk (Fiona) -->
+    <section class="card" id="netzwerk">
+      <h2>1) Netzwerkgrundlagen (IP, Subnetze, Gateway)</h2>
+      <p>Lege das IPv4-Netz fest und dokumentiere Adressen. Beispiel: <code>192.168.10.0/24</code>, Maske <code>255.255.255.0</code>, Gateway <code>192.168.10.1</code>.</p>
+      <h3>Checkliste</h3>
+      <ul class="list">
+        <li>IP-Plan erstellt (Server, Clients, Drucker).</li>
+        <li>Gateway erreichbar (<code>ping 192.168.10.1</code>).</li>
+        <li>DNS-Suffix festgelegt (<code>firma.local</code>).</li>
+      </ul>
+      <div class="footer">
+        <span class="tag">Netzwerk</span>
+        <span class="who">Verantwortlich: Fiona</span>
+      </div>
+    </section>
+
+    <!-- 2) Domänenbeitritt (Fiona) -->
+    <section class="card" id="domain-join">
+      <h2>2) Domänenbeitritt der 4 Clients</h2>
+      <ol class="steps list">
+        <li><b>Systemeigenschaften → Computername → Ändern → Domäne</b> (z. B. <code>firma.local</code>).</li>
+        <li>Domänenkonto angeben → Neustart.</li>
+        <li>Domänenanmeldung testen.</li>
+      </ol>
+      <ul class="list">
+        <li>Zeit synchron halten (NTP).</li>
+        <li>DNS des DC verwenden.</li>
+      </ul>
+      <div class="footer">
+        <span class="tag">Clients</span>
+        <span class="who">Verantwortlich: Fiona</span>
+      </div>
+    </section>
+
+    <!-- 3) Laufwerkszuordnung (Fiona) -->
+    <section class="card" id="drives">
+      <h2>3) Laufwerkszuordnung per GPO</h2>
+      <ol class="steps list">
+        <li>In GPMC: <b>Benutzerkonfiguration → Einstellungen → Windows-Einstellungen → Laufwerkszuordnung</b>.</li>
+        <li><code>S:</code> → <code>\\server\shared</code>, <code>U:</code> → <code>\\server\users\%username%</code>.</li>
+        <li>Item-Level-Targeting verwenden (optional).</li>
+      </ol>
+      <h3>Checkliste</h3>
+      <ul class="list">
+        <li><code>S:</code> und <code>U:</code> sichtbar.</li>
+        <li>Lesen/Schreiben funktioniert.</li>
+        <li><code>gpresult /r</code> korrekt.</li>
+      </ul>
+      <div class="footer">
+        <span class="tag">GPO</span>
+        <span class="who">Verantwortlich: Fiona</span>
+      </div>
+    </section>
+
+    <!-- 4) Druckerfreigabe (Fiona) -->
+    <section class="card" id="printer">
+      <h2>4) Druckerfreigaben</h2>
+      <ol class="steps list">
+        <li>Drucker am Server einrichten & freigeben.</li>
+        <li>GPO: <b>Benutzerkonfiguration → Einstellungen → Systemsteuerungseinstellungen → Drucker</b>.</li>
+        <li>Testseite drucken.</li>
+      </ol>
+      <div class="footer">
+        <span class="tag">Peripherie</span>
+        <span class="who">Verantwortlich: Fiona</span>
+      </div>
+    </section>
+
+    <!-- 5) Glossar -->
+    <section class="card" id="glossar">
+      <h2>5) Begriffserklärungen</h2>
+      <div class="def"><b>GPO (Group Policy Object):</b> Richtlinien für Benutzer/Computer in AD-Domänen.</div>
+      <div class="def"><b>GPO-Verteilung:</b> Übertragung von GPOs an Clients durch den DC.</div>
+      <div class="def"><b>Domänencontroller (DC):</b> Server für Authentifizierung & AD-Verzeichnis.</div>
+      <div class="def"><b>AD DS:</b> Active Directory Domain Services – zentrale Verwaltung.</div>
+      <div class="def"><b>DNS:</b> Namensauflösung Hostname ⇄ IP.</div>
+      <div class="def"><b>DHCP:</b> Automatische Vergabe von IP-Adressen.</div>
+      <div class="def"><b>Konsolidieren:</b> Systeme/Strukturen vereinheitlichen.</div>
+      <div class="def"><b>OU:</b> Organizational Unit für Gruppen & GPOs.</div>
+      <div class="def"><b>Item-Level-Targeting:</b> Zielgenaue GPO-Steuerung.</div>
+      <div class="def"><b>Gateway:</b> Verbindungspunkt ins andere Netzwerk.</div>
+      <div class="footer">
+        <span class="tag">Nachschlagen</span>
+        <span class="who">Verantwortlich: Team</span>
+      </div>
+    </section>
+
+    <hr>
+
+    <!-- 6) Julia [Placeholder] -->
+    <!-- TODO: Julia – AD DS, DNS/DHCP, Benutzer/Gruppen, GPOs, OU-Struktur -->
+    <section class="card placeholder" id="julia">
+      <h2>6) Active Directory & Benutzerverwaltung</h2>
+      <p>[Placeholder] Schritte für AD DS, DNS/DHCP, Benutzer (4 MA + Admin), GPOs, OU-Struktur.</p>
+      <div class="footer">
+        <span class="tag">AD / GPO</span>
+        <span class="who">Verantwortlich: Julia</span>
+      </div>
+    </section>
+
+    <!-- 7) Jule [Placeholder] -->
+    <!-- TODO: Jule – File-Server, Freigaben S:/U:, NTFS, Quotas -->
+    <section class="card placeholder" id="jule">
+      <h2>7) File-Server & Freigaben</h2>
+      <p>[Placeholder] File-Server-Installation, Freigaben, NTFS-Berechtigungen, Quota-Management.</p>
+      <div class="footer">
+        <span class="tag">Storage</span>
+        <span class="who">Verantwortlich: Jule</span>
+      </div>
+    </section>
+
+    <!-- 8) Natasa [Placeholder] -->
+    <!-- TODO: Natasa – IIS, Datenbank, Backup, Monitoring -->
+    <section class="card placeholder" id="natasa">
+      <h2>8) Serverdienste & Monitoring</h2>
+      <p>[Placeholder] Webserver (IIS), Datenbankserver, Backup-Strategie, Monitoring.</p>
+      <div class="footer">
+        <span class="tag">Dienste</span>
+        <span class="who">Verantwortlich: Natasa</span>
+      </div>
+    </section>
+
+    <hr>
+
+    <!-- 9) Quellen -->
+    <section class="card" id="quellen">
+      <h2>9) Quellen & Notizen</h2>
+      <ul class="list">
+        <li>Microsoft Learn – Windows-Netzwerk & Client-Management</li>
+        <li>MS Docs – Gruppenrichtlinien, AD DS, DNS/DHCP</li>
+        <li>Eigene Tests im Schulprojekt</li>
+      </ul>
+      <div class="footer">
+        <span class="tag">Doku</span>
+        <span class="who">Verantwortlich: Team</span>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="wrap" style="border-top:1px solid var(--line); color:var(--muted); text-align:center">
+    © Teamprojekt IT-Administration • Design & Doku: <b>Fiona Aleksic</b> • Bereit für GitHub Pages
   </footer>
+
 </body>
 </html>
